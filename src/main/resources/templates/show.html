@@ -20,10 +20,15 @@
             <br />
             <a href="/">Show All Messages</a><br />
             <br />
-            <div style="background-color: #343a40; border-color: #454d55; color:#fff;">
-                Content :<span><p th:text="${message.content}" ></p></span>
-                Date Posted :<span th:text="${message.posteddate}"></span><br />
-                Sent By :<span th:text="${message.sentby}"></span><br />
+            <div class="row" style="background-color: #343a40; border-color: #454d55; color:#fff;">
+                <div class="col-8" style=" width: 50%; margin: 0; float: left;">
+                    Content :<span><p th:text="${message.content}" ></p></span>
+                    Date Posted :<span th:text="${message.posteddate}"></span><br />
+                    Sent By :<span th:text="${message.sentby}"></span>
+                </div>
+                <div class="col-4" style="float: right;text-align: center; width: 50%;" th:if="${message.image} != null">
+                    <img width="256px" height="256px" th:src="${message.image}" />
+                </div>
             </div>
             <br />
             <a th:href="@{/delete/{id}(id=${message.id})}">Delete this message</a>

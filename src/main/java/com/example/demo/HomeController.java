@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.cloudinary.utils.ObjectUtils;
 import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,9 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.thymeleaf.util.ObjectUtils;
+//import org.thymeleaf.util.ObjectUtils;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Map;
 
@@ -45,10 +47,12 @@ public class HomeController {
         }
         try {
             message.setPosteddate(LocalDateTime.now());
-            Map uploadResult =cloudc.upload(file.getBytes(),
-                    ObjectUtils.asMap("resourecetype", "auto"));
-            message.image(uploadResult.get("url").toString());
-            messageRepository.save(message)
+            Map uploadResult =cloudc.upload(file.getBytes(), ObjectUtils.asMap("resourcetype", "auto"));
+            message.setImage(uploadResult.get("url").toString());
+            messageRepository.save(message);
+        } catch (IOException e){
+            e.printStackTrace();
+            return "redirect:/add";
         }
         return "redirect:/";
     }

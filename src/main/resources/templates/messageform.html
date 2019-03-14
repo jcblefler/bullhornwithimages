@@ -40,7 +40,8 @@
                 <form action="#"
                       th:action="@{/process}"
                       th:object="${message}"
-                      method="post">
+                      method="post"
+                      enctype="multipart/form-data">
                     <input type="hidden" th:field="*{id}" />
                     Content :<textarea style=" vertical-align: middle;" row="3" size="20" th:field="*{content}" />
                     <span th:if="${#fields.hasErrors('content')}"
@@ -50,6 +51,7 @@
                     <span th:if="${#fields.hasErrors('sentby')}"
                           th:errors="*{sentby}"></span><br />
                     <br />
+                    <input type="file" name="file" /><br />
                     <input type="submit" value="Submit" />
                 </form>
             </div>
