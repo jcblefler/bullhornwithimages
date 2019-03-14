@@ -29,6 +29,8 @@ public class Message {
     @Size(min = 1, max = 30)
     private String sentby;
 
+    private String image;
+
     public long getId() {
         return id;
     }
@@ -60,5 +62,13 @@ public class Message {
 
     public void setPosteddate(LocalDateTime posteddate) {
         this.posteddate = posteddate;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }
